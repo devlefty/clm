@@ -1,14 +1,15 @@
 "use client"
 
 import { useState } from "react"
-import { FileText, ListTodo, Send, CheckCircle, BarChart3 } from "lucide-react"
+import { FileText, ListTodo, Send, CheckCircle, BarChart3, Settings } from "lucide-react"
 import { ContractTypeSelection } from "./contract-type-selection"
 import { ContractDrafting } from "./contract-drafting"
 import { ContractApproval } from "./contract-approval"
 import { ContractLedger } from "./contract-ledger"
 import { ContractTodos } from "./contract-todos"
+import { ContractRulesConfig } from "./contract-rules-config"
 
-type TabType = "todos" | "new" | "draft" | "approval" | "ledger"
+type TabType = "todos" | "new" | "draft" | "approval" | "ledger" | "rules"
 
 export function ContractManagementDashboard() {
   const [activeTab, setActiveTab] = useState<TabType>("todos")
@@ -20,6 +21,7 @@ export function ContractManagementDashboard() {
     { id: "draft" as TabType, label: "合同起草", icon: Send },
     { id: "approval" as TabType, label: "审批流程", icon: CheckCircle },
     { id: "ledger" as TabType, label: "合同台账", icon: BarChart3 },
+    { id: "rules" as TabType, label: "规则配置", icon: Settings },
   ]
 
   return (
@@ -32,7 +34,7 @@ export function ContractManagementDashboard() {
                 <FileText className="w-5 h-5 text-primary-foreground" />
               </div>
               <div>
-                <h1 className="text-lg font-semibold text-balance">合同全生命周期管理系统</h1>
+                <h1 className="text-lg font-semibold text-balance">合同易</h1>
               </div>
             </div>
             <div className="flex items-center gap-3 text-sm text-muted-foreground">
@@ -103,6 +105,7 @@ export function ContractManagementDashboard() {
           />
         )}
         {activeTab === "ledger" && <ContractLedger contracts={contracts} />}
+        {activeTab === "rules" && <ContractRulesConfig />}
       </main>
     </div>
   )
